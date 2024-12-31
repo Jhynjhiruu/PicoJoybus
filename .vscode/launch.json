@@ -4,7 +4,7 @@
     {
       "name": "Pico launch",
       "type": "cortex-debug",
-      "executable": "./build/PicoJoybus.elf",
+      "executable": "./build/JoybusProbe.elf",
       "request": "launch",
       "servertype": "external",
       "gdbTarget": "host.docker.internal:3333",
@@ -16,7 +16,7 @@
     {
       "name": "Pico attach",
       "type": "cortex-debug",
-      "executable": "./build/PicoJoybus.elf",
+      "executable": "./build/JoybusProbe.elf",
       "request": "attach",
       "servertype": "external",
       "gdbTarget": "host.docker.internal:3333",

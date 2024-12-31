@@ -1,32 +1,27 @@
 cmake_minimum_required(VERSION 3.13)
 
-set(PICO_BOARD pico_w)
+include(pico_sdk_import.cmake)
 
-include($ENV{PICO_SDK_PATH}/pico_sdk_init.cmake)
+project(JoybusProbe  C CXX ASM)
 
-project(PicoJoybus C CXX ASM)
+set(PICO_BOARD pico)
 
 pico_sdk_init()
 
-include_directories(${CMAKE_CURRENT_LIST_DIR}/src/config)
-
-add_executable(PicoJoybus
+add_executable(JoybusProbe
     src/main.c
     src/joybus.c
 )
 
-pico_generate_pio_header(PicoJoybus ${CMAKE_CURRENT_LIST_DIR}/src/joybus.pio)
+pico_generate_pio_header(JoybusProbe ${CMAKE_CURRENT_LIST_DIR}/src/joybus.pio)
 
-target_link_libraries(PicoJoybus
+target_link_libraries(JoybusProbe
     hardware_dma
     hardware_pio
-    pico_btstack_ble
-    pico_btstack_cyw43
-    pico_cyw43_arch_none
     pico_stdlib
 )
 
-pico_enable_stdio_usb(PicoJoybus 0)
-pico_enable_stdio_uart(PicoJoybus 1)
+pico_enable_stdio_usb(JoybusProbe 1)
+pico_enable_stdio_uart(JoybusProbe 1)
 
-pico_add_extra_outputs(PicoJoybus)
+pico_add_extra_outputs(JoybusProbe)
