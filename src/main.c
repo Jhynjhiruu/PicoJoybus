@@ -211,7 +211,7 @@ int main(void)
         GET_CHAR(ch);
         if (ch == 0xA5)
         {
-            uint8_t a, b, c, d;
+            int a, b, c, d;
             GET_CHAR(a);
             GET_CHAR(b);
             GET_CHAR(c);
