@@ -198,5 +198,26 @@ int main(void)
         {
             putchar(tx);
         }*/
+
+#define GET_CHAR(x)                  \
+    {                                \
+        x = getchar_timeout_us(0);   \
+        if (x == PICO_ERROR_TIMEOUT) \
+            continue;                \
+    }
+
+        int ch;
+
+        GET_CHAR(ch);
+        if (ch == 0xA5)
+        {
+            uint8_t a, b, c, d;
+            GET_CHAR(a);
+            GET_CHAR(b);
+            GET_CHAR(c);
+            GET_CHAR(d);
+
+            controller_state = (a << 24) | (b << 16) | (c << 8) | (d);
+        }
     }
 }
