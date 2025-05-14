@@ -15,7 +15,8 @@ enum joybus_cmd_e {
     JOYBUS_CMD_STATE = 0x01,
     JOYBUS_CMD_READ = 0x02,
     JOYBUS_CMD_WRITE = 0x03,
-    JOYBUS_CMD_TXRX = 0x55,
+    JOYBUS_CMD_RX = 0x54,
+    JOYBUS_CMD_TX = 0x55,
     JOYBUS_CMD_RESET = 0xFF,
 };
 

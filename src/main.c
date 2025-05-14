@@ -83,38 +83,40 @@ static uint8_t __time_critical_func(joybus_callback)(uint8_t ch, uint8_t cmd, ui
         }
         break;
 
-    case JOYBUS_CMD_TXRX:
+    case JOYBUS_CMD_TX:
         if (rx_length == 2)
         {
             tx_length = 2;
 
             const uint8_t byte = rx_buffer[0];
-            const uint8_t index = rx_buffer[1];
 
-            if (rx_index != index)
-            {
-                add_to_queue(&rx_queue, byte);
+            add_to_queue(&rx_queue, byte);
 
-                rx_index = index;
-            }
-
+            tx_buffer[0] = 0;
+        }
+        break;
+    
+    case JOYBUS_CMD_RX:
+        if (rx_length == 2)
+        {
+            tx_length = 2;
+            
+            tx_buffer[0] = 0;
+            
             const int resp = get_from_queue(&tx_queue);
             if (resp >= 0)
             {
-                tx_index++;
                 tx_buffer[0] = resp;
             }
-            tx_buffer[1] = tx_index;
         }
-        break;
 
     default:
-        printf("Unknown command received: 0x%02X, length: %d\n", cmd, rx_length);
+        /*printf("Unknown command received: 0x%02X, length: %d\n", cmd, rx_length);
         for (unsigned int i = 0; i < rx_length; i++)
         {
             printf("%02X ", rx_buffer[i]);
         }
-        printf("\n");
+        printf("\n");*/
         break;
     }
 
@@ -124,6 +126,7 @@ static uint8_t __time_critical_func(joybus_callback)(uint8_t ch, uint8_t cmd, ui
 int main(void)
 {
     stdio_init_all();
+    stdio_set_translate_crlf(&stdio_usb, false);
 
     sleep_ms(1000);
 
