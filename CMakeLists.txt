@@ -4,7 +4,7 @@ include(pico_sdk_import.cmake)
 
 project(JoybusProbe  C CXX ASM)
 
-set(PICO_BOARD pico)
+set(PICO_BOARD pico1)
 
 pico_sdk_init()
 

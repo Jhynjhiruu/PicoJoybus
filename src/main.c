@@ -125,6 +125,8 @@ int main(void)
 {
     stdio_init_all();
 
+     stdio_set_translate_crlf(&stdio_usb, false);
+
     sleep_ms(1000);
 
     // printf("hello\n");
